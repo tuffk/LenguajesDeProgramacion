@@ -27,3 +27,5 @@ fibcola n res prev
 fibbase n 
          | n == 0 = 0
          | otherwise = fibcola n 1 0
+
+      
