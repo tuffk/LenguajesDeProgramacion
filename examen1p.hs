@@ -16,3 +16,14 @@ palindromo l = let kuz [] = True
 
 -- ej 2
 -- fibonacci 
+fibonacci 0 = 1
+fibonacci 1 = 1
+fibonacci n = (fibonacci (n-1)) + (fibonacci (n-2))
+
+fibcola n res prev
+        | n == 0 = res
+        | otherwise = fibcola (n -1) (res + prev) res
+
+fibbase n 
+         | n == 0 = 0
+         | otherwise = fibcola n 1 0
