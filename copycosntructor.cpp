@@ -37,5 +37,6 @@ int main (void)
 	b = a;
 	Foo d =b;
 	Foo e = b.getFoo();
+	Foo f (c.getFoo());
 	return 0; 
 }
