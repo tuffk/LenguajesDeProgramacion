@@ -19,14 +19,3 @@ crossword(H1,H2,V1,V2,V3,V4) :- palabra(H1,_,H12,_,H14,_,H16),
                                 V3\=V4.
 
 
-% emeplo lsita
-% se delcara con corchete
-% recursividad
-inList(X, [X|T]).
-inList(X, [H|T]) :- inList(X,T).
-
-%imprimir la posicion de encuentro
-inListCont(X,[X|_],Cont).
-inListCont(X,[_|T],Cont):- inListCont(X,T,Cont+1).
-
-%buscar el mayor valor
