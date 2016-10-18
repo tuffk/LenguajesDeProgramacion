@@ -82,10 +82,11 @@ fuckingsort([H1, H2], [H2, H1]) :- H1 > H2.
 fuckingsort(L, R) :- halfhalf(L, A, B), fuckingsort(A, Asort), fuckingsort(B, Bsort), merge(Asort, Bsort, R).
 
 %bucket sort
-buck(List,Res) :- bucketsort(List,B1,B2,B3),quick_sort2(B1,B1S),quick_sort2(B2,B2S),quick_sort2(B3,B3S),concbuck(B1S,B2S,B3S,Res).
-bucketsort([],[],[],[]).
-bucketsort([H|T],[H|P],B2,B3):- H < 4,bucketsort(T,P,B2,B3).
-bucketsort([H|T],B1,[H|P],B3):- H>= 4,H<7,bucketsort(T,B1,P,B3).
-bucketsort([H|T],B1,B2,[H|P]):- H>=7,bucketsort(T,B1,B2,P).
+buck(List,Res) :- getMinMax(List,Min,Max),bucketsort(List,B1,B2,B3,Min,Max),quick_sort2(B1,B1S),quick_sort2(B2,B2S),quick_sort2(B3,B3S),concbuck(B1S,B2S,B3S,Res).
+bucketsort([],[],[],[],Min,Max).
+bucketsort([H|T],[H|P],B2,B3,Min,Max):- H < Min,bucketsort(T,P,B2,B3,Min,Max).
+bucketsort([H|T],B1,[H|P],B3,Min,Max):- H>= Min,H<Max,bucketsort(T,B1,P,B3,Min,Max).
+bucketsort([H|T],B1,B2,[H|P],Min,Max):- H>=Max,bucketsort(T,B1,B2,P,Min,Max).
 %concbuck(B1,B2,B3,Res):-Res = [B1,B2,B3].
 concbuck(B1,B2,B3,Res):- append(B1,B2,Temp),append(Temp,B3,Res).
+getMinMax(List,Min,Max):- max_list(List,TMax), Min is TMax/3, Max is TMax*2/3.
