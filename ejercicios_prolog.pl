@@ -87,4 +87,5 @@ bucketsort([],[],[],[]).
 bucketsort([H|T],[H|P],B2,B3):- H < 4,bucketsort(T,P,B2,B3).
 bucketsort([H|T],B1,[H|P],B3):- H>= 4,H<7,bucketsort(T,B1,P,B3).
 bucketsort([H|T],B1,B2,[H|P]):- H>=7,bucketsort(T,B1,B2,P).
-concbuck(B1,B2,B3,Res):-Res = [B1,B2,B3].
+%concbuck(B1,B2,B3,Res):-Res = [B1,B2,B3].
+concbuck(B1,B2,B3,Res):- append(B1,B2,Temp),append(Temp,B3,Res).
