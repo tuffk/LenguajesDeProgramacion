@@ -28,4 +28,5 @@ isSon(X,Y,R):- (getRight(X,Y);getLeft(X,Y)),R is Y.%X  es this, Y es le hijo que
 getSons(X,R):- (tree(S,_,T,X);root(S,_,T,X)),R = [S|T].
 getBrother(X,R):- (tree(X,_,Z,_);tree(Z,_,X,_);root(Z,_,X,_);root(X,_,Z,_)), R is Z.
 getHeight(Nod,Init,Res):- getLeft(Nod,L),getHeight(L,Init+1,Res);Res is Init.
-%pozole(tree,Nodo):- .
+%recorre(Nod):- write(Nod),nl.
+recorre(Nod):- write(Nod),nl,getRight(Nod,R),getLeft(Nod,L),(recorre(L);recorre(R)). % recorrido por profundidad "top-down"
