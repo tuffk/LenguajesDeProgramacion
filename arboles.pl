@@ -30,3 +30,19 @@ getBrother(X,R):- (tree(X,_,Z,_);tree(Z,_,X,_);root(Z,_,X,_);root(X,_,Z,_)), R i
 getHeight(Nod,Init,Res):- getLeft(Nod,L),getHeight(L,Init+1,Res);Res is Init.
 %recorre(Nod):- write(Nod),nl.
 recorre(Nod):- write(Nod),nl,getRight(Nod,R),getLeft(Nod,L),(recorre(L);recorre(R)). % recorrido por profundidad "top-down"
+
+inserta(Nod):- not(nod(Nod)),assert(nod(Nod)),lista(X),append(X,[Nod],Lres),retract(lista(_)),assert(lista(Lres)).%,plantar().%inserta un nodo a la base de conocimiento y reconstruye el arbol
+plantar():- not(quita()). %borra el arbol, para reconstruirlo balanceado
+
+%funcion recursiva que toma una lista saca el de enmedio y se llama a si misma dividiendo la lista en left y right
+%la funcion debe pasar al padre, si no hay el nodo es root
+
+makelist(L).
+
+%quita():- retract(tree(_,_,_,_)),quita(),!. %esta funcion siempre devuelve false. llamar con not(quita()).
+quita():- retract(nod(_)),quita(),!. %esta funcion siempre devuelve false. llamar con not(quita()).
+borramela(Nod):- retract(nod(Nod)),plantar().
+
+%referencias
+% http://www.qmatica.com/DataStructures/Trees/AVL/AVLTree.html 
+% https://www.cs.usfca.edu/~galles/visualization/AVLtree.html 
